@@ -1,0 +1,59 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+{% if product.type == 'Container Box' or product.type == "Box Produce" %}
+  <article class="mt3-s">
+    <div class="flex flex-column flex-row-ns">
+      <div class="pr3-ns mb4 mb0-ns w-100 w-50-ns">
+        <img src="{{ featured_image | img_url: 'large' }}"
+             class="br2 ba b--black-50"
+             alt="{{ featured_image.alt | escape }}">
+      </div>
+      <div class="w-100 w-50-ns pl3-ns">
+        <h2 class="f2 fw4 mt0 mb1 lh-title">{{ product.title }}</h2>
+        <p class="f5 lh-copy mv0 b black-80" id="product-price">{{ product.price | money }}</p>
+        <script type="application/json" id="product-json">
+          {{ product | json }}
+        </script>
+        <script type="application/json" id="cart-json">
+          {{ cart | json }}
+        </script>
+        <div id="app"></div>
+        <div class="f6 f5-l lh-copy black-80 mt0" id="product-description">
+           {{ product.description }}
+        </div>
+      </div>
+    </div>
+  </article>
+{% else %}
+  <p>Gotta do something if not a container box nor produce item</p>
+{% endif %}
+
+{% comment %}
+<img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+{% for image in product.images %}
+  <a href="{{ image.src | img_url: 'large' }}">
+    <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+  </a>
+{% endfor %}
+<h1>{{ product.title }}</h1>
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+  <select name="id" id="productSelect">
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        <option value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - sold out
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+  {{ current_variant.price | money }}
+  <label for="Quantity">quantity</label>
+  <input type="number" id="Quantity" name="quantity" value="1" min="1">
+  <button type="submit" name="add" id="AddToCart">Add to cart</button>
+</form>
+<div>{{ product.description }}</div>
+{% endcomment %}

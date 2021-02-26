@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+
+  <body class="sans-serif w-100">
+
+    <%- include('../partials/header'); %>
+
+    <!-- open main content -->
+    <main class="w-100 bg-white black-70 center">
+
+    <%- include('../partials/product-overview'); %>
+
+    <div class="ma1" id="app" />
+
+    <script type="application/json" id="ProductJson-product-template">
+{
+  "id": 5571286728870,
+  "title": "The Small Vege Box",
+  "handle": "small-veggie-box",
+  "description": "<h4>*Range subject to availability on the day<br>\n</h4>\n<p>Orders close 3 days before delivery date</p>\n<p><span>Delivery between 10am and 9pm</span></p>\n<p><span>All Vegetables are Certified Organic</span></p>",
+  "published_at": "2020-08-05T14:42:23+12:00",
+  "created_at": "2020-08-05T14:42:23+12:00",
+  "vendor": "streamsideorganics",
+  "type": "Container Box",
+  "tags": [
+    "spo-default",
+    "spo-enabled"
+  ],
+  "price": 2500,
+  "price_min": 2500,
+  "price_max": 2500,
+  "available": true,
+  "price_varies": false,
+  "compare_at_price": null,
+  "compare_at_price_min": 0,
+  "compare_at_price_max": 0,
+  "compare_at_price_varies": false,
+  "variants": [
+    {
+      "id": 35541956231334,
+      "title": "Default Title",
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "sku": "Small Vege",
+      "requires_shipping": true,
+      "taxable": true,
+      "featured_image": null,
+      "available": true,
+      "name": "The Small Vege Box",
+      "public_title": null,
+      "options": [
+        "Default Title"
+      ],
+      "price": 2500,
+      "weight": 10000,
+      "compare_at_price": null,
+      "inventory_management": "shopify",
+      "barcode": "",
+      "requires_selling_plan": false,
+      "selling_plan_allocations": []
+    }
+  ],
+  "images": [
+    "//cdn.shopify.com/s/files/1/0446/3201/5014/products/SmallVegeBox02.jpg?v=1606465787"
+  ],
+  "featured_image": "//cdn.shopify.com/s/files/1/0446/3201/5014/products/SmallVegeBox02.jpg?v=1606465787",
+  "options": [
+    "Title"
+  ],
+  "media": [
+    {
+      "alt": null,
+      "id": 13910122954918,
+      "position": 1,
+      "preview_image": {
+        "aspect_ratio": 1.333,
+        "height": 750,
+        "width": 1000,
+        "src": "https://cdn.shopify.com/s/files/1/0446/3201/5014/products/SmallVegeBox02.jpg?v=1606465237"
+      },
+      "aspect_ratio": 1.333,
+      "height": 750,
+      "media_type": "image",
+      "src": "https://cdn.shopify.com/s/files/1/0446/3201/5014/products/SmallVegeBox02.jpg?v=1606465237",
+      "width": 1000
+    }
+  ],
+  "requires_selling_plan": false,
+  "selling_plan_groups": [],
+  "content": "<h4>*Range subject to availability on the day<br>\n</h4>\n<p>Orders close 3 days before delivery date</p>\n<p><span>Delivery between 10am and 9pm</span></p>\n<p><span>All Vegetables are Certified Organic</span></p>"
+  }
+    </script>
+    <script src="/product-description.js"></script>
+
+    </main>
+    <!-- close main content -->
+
+    <%- include('../partials/footer'); %>
+
+    <script src="/app.js"></script>
+    <script src="/vendor.js"></script>
+    <script>require('initialize');</script>
+
+  </body>
+</html>

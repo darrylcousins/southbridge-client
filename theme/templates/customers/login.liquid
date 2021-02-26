@@ -1,0 +1,90 @@
+<!-- /templates/customers/login.liquid -->
+
+<div class="measure center">
+  {% form 'customer_login', novalidate: 'novalidate' %}
+
+    <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+      <legend class="f3 fw4 ph0 mh0">Login</legend>
+
+      {%- if form.errors -%}
+        <h2 class="" tabindex="-1" data-form-status>Please correct the errors:</h2>
+          {{ form.errors | default_errors }}
+      {%- endif -%}
+
+      <div class="tl">
+
+        <label for="customer_email" class="db fw3 lh-copy f5 pb1">Email</label>
+        <input
+          type="email"
+          name="customer[email]"
+          id="customer_email"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+          {%- if form.errors contains 'form' -%}
+          aria-invalid="true"
+          {%- endif -%}
+          />
+
+        {% if form.password_needed %}
+          <label for="customer_password" class="db fw3 lh-copy f5 pb1">Password</label>
+          <input
+            type="password"
+            value=""
+            name="customer[password]"
+            id="customer_password"
+            class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+            {%- if form.errors contains 'form' -%}
+            aria-invalid="true"
+            {%- endif -%}
+            />
+        {% endif %}
+
+      </div>
+    </fieldset>
+
+    <input
+      type="submit"
+      class="f6 ttu w-100 tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+      value="Login"
+      />
+
+    <p class="tr">
+      {{ 'Create account' | customer_register_link | replace: 'href', 'class="link" href' }}
+    </p>
+
+  {% endform %}
+
+  {% form 'recover_customer_password' %}
+
+    <fieldset id="forgot_password" class="ba b--transparent ph0 mh0">
+
+      <legend class="f3 fw4 ph0 mh0">Forgot Password?</legend>
+
+      {%- if form.errors -%}
+        <h2 class="" tabindex="-1" data-form-status>Please correct the errors:</h2>
+          {{ form.errors | default_errors }}
+      {%- endif -%}
+
+      <label for="customer_email" class="db fw3 lh-copy f5 pb1">Email Address</label>
+
+      <input
+        type="email"
+        value=""
+        name="email"
+        id="customer_email"
+        class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+        {%- if form.errors contains 'form' -%}
+        aria-invalid="true"
+        {%- endif -%}
+        />
+    </fieldset>
+
+    <input type="submit"
+      class="f6 ttu w-100 tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+      value="Submit"
+      />
+
+  {% endform %}
+</div>

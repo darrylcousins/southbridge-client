@@ -1,0 +1,71 @@
+<!-- /templates/customers/register.liquid -->
+
+<div class="measure center">
+  {% form 'create_customer' %}
+
+  <fieldset id="create_customer" class="ba b--transparent ph0 mh0">
+    <legend class="f3 fw4 ph0 mh0">Register</legend>
+
+    {%- if form.errors -%}
+      <h2 class="" tabindex="-1" data-form-status>Please correct the errors:</h2>
+        {{ form.errors | default_errors }}
+    {%- endif -%}
+
+    <label for="first_name" class="db fw3 lh-copy f5 pb1">First Name</label>
+    <input
+      type="text"
+      value=""
+      id="first_name"
+      name="customer[first_name]"
+      class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+      {%- if form.errors contains 'form' -%}
+      aria-invalid="true"
+      {%- endif -%}
+      />
+
+    <label for="last_name" class="db fw3 lh-copy f5 pb1">Last Name</label>
+    <input
+      type="text"
+      value=""
+      id="last_name"
+      name="customer[last_name]"
+      class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+      {%- if form.errors contains 'form' -%}
+      aria-invalid="true"
+      {%- endif -%}
+      />
+
+    <label for="email" class="db fw3 lh-copy f5 pb1">Email</label>
+    <input
+      type="email"
+      value=""
+      name="customer[email]"
+      id="email"
+      class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+      {%- if form.errors contains 'form' -%}
+      aria-invalid="true"
+      {%- endif -%}
+      />
+
+
+      <label for="password" class="db fw3 lh-copy f5 pb1">Password</label>
+      <input
+        type="password"
+        value=""
+        name="customer[password]"
+        id="password"
+        class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100{% if form.errors contains 'form' %} ba b--red{% endif %}"
+        {%- if form.errors contains 'form' -%}
+        aria-invalid="true"
+        {%- endif -%}
+        />
+
+  </fieldset>
+
+  <input type="submit"
+    class="f6 ttu w-100 tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+    value="Register"
+    />
+
+{% endform %}
+</div>

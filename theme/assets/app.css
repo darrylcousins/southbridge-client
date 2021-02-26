@@ -1,0 +1,317 @@
+/* whatever is needed */
+
+@keyframes loader {
+  0% {
+    width: 0;
+  }
+  20% {
+    width: 10%;
+  }
+  25% {
+    width: 24%;
+  }
+  43% {
+    width: 41%;
+  }
+  56% {
+    width: 50%;
+  }
+  66% {
+    width: 52%;
+  }
+  71% {
+    width: 60%;
+  }
+  75% {
+    width: 76%;
+  }
+  94% {
+    width: 86%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.progress-bar {
+  border-radius: 30px;
+  overflow: hidden;
+  width: 100%;
+}
+.progress-bar span {
+  display: block;
+}
+
+.bar {
+  background: rgba(0, 0, 0, 0.075);
+}
+
+.progress {
+  animation: loader 8s ease infinite;
+  background: #162842;
+  color: #fff;
+  padding: 2px;
+  width: 0;
+}
+
+.progress-bar {
+  left: 50%;
+  max-width: 100%;
+  position: relative;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.progress-bar-bak {
+  left: 50%;
+  max-width: 50%;
+  position: relative;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  fill: #555;
+}
+
+.icon-large {
+  display: inline-block;
+  vertical-align: middle;
+  fill: #aaa;
+}
+
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  display: none;
+  /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: #4c2e2e;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fad14d transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fad14d transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+  color: #fad14d;
+  padding: 8px 16px;
+  border: 1px solid #000;
+  border-color: transparent transparent rgba(255, 255, 255, 0.2) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.select-selected {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bottom-radius {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: #4c2e2e;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: "Avenir Next", avenir, system-ui, apple-system, Roboto, sans-serif;
+  font-weight: 400;
+  color: #474747;
+  line-height: 1.5;
+  font-size: 0.93333rem;
+}
+
+a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.transition-fade {
+  transition: opacity 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+.btn {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  color: #fad14d;
+  background-color: #4c2e2e;
+  border-color: #4c2e2e;
+  border: 1px;
+  width: 100%;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.1em;
+  opacity: 1;
+  transition: opacity 0.15s ease-in;
+  outline: 0;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:hover, .btn:focus {
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in;
+}
+
+.btn:active {
+  opacity: 0.8;
+  transition: opacity 0.15s ease-out;
+}
+
+.shopify-challenge__button {
+  width: 60%;
+}
+
+.fade-out {
+  animation-name: fadeOut;
+  animation-duration: 2s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.flash {
+  background-color: #D5F5E3;
+  border-color: #0B5345;
+  color: #0B5345;
+  border-width: 1px 1px 3px 1px;
+  /*
+  width: 400px;
+  left: 50%;
+  right: 25%;
+  transform: translate(-50%, -50%);
+  */
+}
+
+.warn {
+  background-color: #FDEBD0;
+  border-color: #F39C12;
+  border-width: 3px 1px 1px 1px;
+}
+
+.fg-warn {
+  color: #A04000;
+}
+
+.fg-streamside-blue {
+  color: #162842;
+}
+
+.bg-streamside-blue {
+  background-color: #162842;
+}
+
+.b--streamside-blue {
+  border-color: #162842;
+}
+
+.fg-streamside-maroon {
+  color: #4e1018;
+}
+
+.bg-streamside-maroon {
+  background-color: #4e1018;
+}
+
+.b--streamside-maroon {
+  border-color: #4e1018;
+}
+
+.fg-streamside-orange {
+  color: #b55103;
+}
+
+.bg-streamside-orange {
+  background-color: #b55103;
+}
+
+.b--streamside-orange {
+  border-color: #b55103;
+}
+
+.fg-streamside-green {
+  color: #332912;
+}
+
+.bg-streamside-green {
+  background-color: #332912;
+}
+
+.b--streamside-green {
+  border-color: #332912;
+}
+
+.debut-yellow {
+  color: #fad14d;
+}
+
+.bg-debut-brown {
+  background-color: #4c2e2e;
+}
+
+.b--debut-brown {
+  border-color: #4c2e2e;
+}
+
+
+/*# sourceMappingURL=app.css.map*/

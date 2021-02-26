@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+  <title>{{ page_title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  {{ content_for_header }} <!-- Header hook for plugins -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  {% comment %}
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  {% endcomment %}
+  {{ 'vendor.css' | asset_url | stylesheet_tag }}
+  {{ 'app.css' | asset_url | stylesheet_tag }}
+  {{ 'vendor.js' | asset_url | script_tag }}
+  {{ 'app.js' | asset_url | script_tag }}
+
+  <script>require('initialize');</script>
+
+</head>
+<body>
+
+  {% comment %}
+  Place holder for announcement bar
+  {% endcomment %}
+  <div id="announcement-bar" class="fl w-100 pa1 tc debut-yellow bg-streamside-maroon">
+    <p id="announcement-bar_message">
+    My announcement message
+    </p>
+  </div>
+
+  <header>
+    <nav class="db dt-ns w-100 mw8 center border-box">
+      <a class="db dtc-ns v-mid mid-gray link dim w-100 w-25-ns tc tl-ns pt2 mb0-ns" href="/" title="Home">
+        <img src="{{ 'logo.jpg' | asset_url }}"
+             style="width: 200px;height: 190px"
+             class="dib ba b--black-10 mw-80 br2" alt="Streamside Organics">
+      </a>
+      <div class="db db-ns dtc-ns v-mid w-100 w-50-ns tc tr-ns">
+
+            {% for link in linklists.main-menu.links %}
+              {% assign child_list_handle = link.title | handleize %}
+              {% if linklists[child_list_handle].links != blank %}
+                <a class="link dim dark-gray f6 db dib-ns mr4-ns pv2 bt b--debut-brown bn-ns"
+                   href="{{ link.url }}">{{ link.title }}</a>
+                [{% for childlink in linklists[child_list_handle].links %}
+                  <a class="link dim dark-gray f6 db dib-ns mr4-ns pv2 bt b--debut-brown bn-ns"
+                     href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                {% endfor %}]
+              {% else %}
+                <a class="link dim dark-gray f6 db dib-ns mr4-ns pv2 bt {% if forloop.last %}bb mb2{% endif %} b--debut-brown bn-ns"
+                   href="{{ link.url }}">{{ link.title }}</a>
+              {% endif %}
+            {% endfor %}
+
+      </div>
+      <div class="db dtc-ns v-mid w-100 w-25-ns tc tr-ns">
+
+          <a class="link dim f6 f5-ns dib mr3 mr4-ns" href="/search">{% include 'icon-search' %}</a>
+
+      {% if shop.customer_accounts_enabled %}
+        <a class="link dim f6 f5-ns dib mr3 mr4-ns" href="/account">{% include 'icon-login' %}</a>
+      {% endif %}
+
+      {% comment %}
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="/account">account</a>
+          <a class="link dim f6 f5-ns dib mr3 mr4-ns" href="/account">{% include 'icon-login' %}</a>
+          {{ 'log out'  | customer_logout_link }}
+        {% else %}
+          {{ 'log in ' | customer_login_link }}
+          {{ 'register' | customer_register_link }}
+        {% endif %}
+      {% endif %}
+      {% endcomment %}
+
+          <a class="link dim f6 f5-ns dib mr3 mr4-ns" href="/cart">{% include 'icon-cart' %}</a>
+          {% comment %}
+          <a class="link dim f6 f5-ns dib mr3 mr4-ns dn-ns" href="/search">{% include 'icon-hamburger' %}</a>
+          {% endcomment %}
+
+      </div>
+
+    </nav>
+  </header>
+
+  <main id="swup" role="main" class="center mw8 ph2 ph0-ns pv3 transition-fade" data-page-type="{{ request.page_type }}">
+    {{ content_for_layout }}
+  </main>
+
+  <footer id="footer" class="bt b--black-10">
+    <p class="f6 fw1 tr gray pr5 mt2">© 2021 Crazyman Productions</p>
+  </footer>
+
+  <script type="application/json" id="variant-map">
+    {
+      "35649803518118": 37827699835030,
+      "35541956198566": 37827699867798,
+      "37276388032678": 37827699900566,
+      "37257345400998": 37827699933334,
+      "35541956362406": 37827700064406,
+      "35561273688230": 37827699966102,
+      "35563751669926": 37827700031638,
+      "35541956231334": 37827699998870,
+      "35561273753766": 37827700097174,
+      "37214501666982": 37834430513302,
+      "37156844273830": 37834430972054,
+      "37490742362278": 37834431037590,
+      "37394112348326": 37834431004822,
+      "37544305885350": 37834431070358,
+      "35541978316966": 37834431299734,
+      "37490740920486": 37834431430806,
+      "37394121130150": 37834431496342,
+      "37276291694758": 37834431463574,
+      "37544376008870": 37834431529110,
+      "37000075018406": 37834431627414,
+      "37535961514150": 37834431692950,
+      "37214399266982": 37834431758486,
+      "37000166998182": 37834431922326,
+      "35541978513574": 37834431955094,
+      "37720705532070": 37834432020630,
+      "35541978185894": 37834432151702,
+      "37490765758630": 37834431987862,
+      "37394160648358": 37834432053398,
+      "37214373642406": 37834432282774,
+      "37000221917350": 37834432217238,
+      "37433044041894": 37834432184470,
+      "37433056395430": 37834432250006,
+      "37276235038886": 37834432381078,
+      "37720671748262": 37834433495190,
+      "37066802495654": 37834433659030,
+      "35541979431078": 37834433855638,
+      "37490755633318": 37834433822870,
+      "37544315682982": 37834433986710,
+      "37658848297126": 37834430120086,
+      "35580704653478": 37834430152854,
+      "37658833453222": 37834430185622,
+      "35541977039014": 37834430251158,
+      "35580713468070": 37834430218390,
+      "35541979529382": 37834430283926,
+      "35580708913318": 37834430349462,
+      "35580724150438": 37834430316694,
+      "37214497374374": 37834430513302,
+      "35541977071782": 37834430546070,
+      "37299929186470": 37834430578838,
+      "35541977989286": 37834430644374,
+      "37000257011878": 37834430611606,
+      "37276198600870": 37834430677142,
+      "35580660547750": 37834430742678,
+      "35541981135014": 37834430709910,
+      "35580692070566": 37834430775446,
+      "37276212560038": 37834430808214,
+      "35580549136550": 37834430840982,
+      "35541978120358": 37834430906518,
+      "35580529213606": 37834430939286,
+      "37156848500902": 37834430972054,
+      "35541979594918": 37834431037590,
+      "37394105565350": 37834431004822,
+      "37544299987110": 37834431070358,
+      "35541978218662": 37834431299734,
+      "35541980577958": 37834431201430,
+      "35541978054822": 37834431332502,
+      "35541978382502": 37834431398038,
+      "37490737119398": 37834431430806,
+      "37214432034982": 37834431365270,
+      "35580976988326": 37834431496342,
+      "37276287697062": 37834431463574,
+      "37299927318694": 37834431529110,
+      "35541979398310": 37834431627414,
+      "35541979463846": 37834431594646,
+      "37299931742374": 37834431561878,
+      "37535948996774": 37834431692950,
+      "37214379081894": 37834431758486,
+      "35541980676262": 37834431660182,
+      "35541980446886": 37834431791254,
+      "35541979660454": 37834431824022,
+      "35541977432230": 37834431856790,
+      "35541979758758": 37834431922326,
+      "37000222212262": 37834431955094,
+      "35541979791526": 37834431889558,
+      "37544338030758": 37834432020630,
+      "35541979857062": 37834432151702,
+      "35541980151974": 37834431987862,
+      "37394160156838": 37834432053398,
+      "35541980545190": 37834432118934,
+      "37214368366758": 37834432282774,
+      "35541977006246": 37834432217238,
+      "37433051480230": 37834432184470,
+      "37433054855334": 37834432250006,
+      "37276226846886": 37834432381078,
+      "37067303747750": 37834432315542,
+      "37067299618982": 37834432479382,
+      "35541980741798": 37834432348310,
+      "35541980774566": 37834432413846,
+      "35541980840102": 37834433495190,
+      "35541980872870": 37834433593494,
+      "37066924818598": 37834433560726,
+      "37066799382694": 37834433659030,
+      "35541978415270": 37834433462422,
+      "35541979201702": 37834433527958,
+      "35541981724838": 37834433626262,
+      "35541981855910": 37834433691798,
+      "35541982216358": 37834433757334,
+      "35541982281894": 37834433855638,
+      "35541978153126": 37834433724566,
+      "35541982314662": 37834433822870,
+      "35541979562150": 37834433790102,
+      "35541982380198": 37834433888406,
+      "35541982412966": 37834433921174,
+      "37544311914662": 37834433986710,
+      "35541982445734": 37834434019478,
+      "35541982544038": 37834434216086,
+      "35541982675110": 37834434085014,
+      "35541983199398": 37834434117782,
+      "35541983789222": 37834434150550
+    }
+  </script>
+
+</body>
+</html>

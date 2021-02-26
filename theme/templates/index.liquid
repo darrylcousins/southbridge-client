@@ -1,0 +1,8 @@
+<h1 class="tc fw4 tracked">Vege Boxes</h1>
+{% for product in collections.frontpage.products limit:6 %}
+  {% if product.type == 'Container Box' %}
+    {% include 'box-product-snippet' %}
+  {% else %}
+    <p>Gotta do something if not a container box</p>
+  {% endif %}
+{% endfor %}

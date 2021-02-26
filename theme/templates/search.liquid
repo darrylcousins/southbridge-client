@@ -1,0 +1,67 @@
+{% paginate search.results by 10 %}
+
+<div class="bb b--black-20 mb2 pb2">
+  <div class="measure center">
+    <form action="/search" method="get" role="search">
+      <fieldset id="search" class="ba b--transparent ph0 mh0">
+        <legend class="f3 fw4 ph0 mh0">Search</legend>
+
+        <label for="first_name" class="dn fw3 lh-copy f5 pb1">Search Term</label>
+        <input
+          type="text"
+          value="{{ search.terms | escape }}"
+          id="q"
+          name="q"
+          class="pa2 br2 input-reset ba bg-transparent hover-bg-black-10 hover-black-80 w-100"
+          {%- if form.errors contains 'form' -%}
+          aria-invalid="true"
+          {%- endif -%}
+          />
+
+      </fieldset>
+
+      <input type="submit"
+        class="f6 ttu w-100 tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+        value="Submit"
+        />
+
+    </form>
+  </div>
+</div>
+
+  {% if search.performed %}
+    {% for item in search.results %}
+      <article class="bb b--black-10 pv2">
+        <div class="flex flex-column flex-row-ns">
+          <div class="pr3-ns mb2 mb0-ns w-100 w-25-ns">
+            {% if item.featured_image %}
+              <a
+                class="db no-underline black dim"
+                href="{{ item.url | within: collection }}"
+                title="{{ item.title | escape }}"
+                >
+                {{ item.featured_image.src | img_url: 'large' | img_tag: item.featured_image.alt }}
+              </a>
+            {% else %}
+              {% include 'icon-image-blank' %}
+            {% endif %}
+          </div>
+          <div class="w-100 w-75-ns pl3-ns">
+            <h1 class="f3 fw1 mt0 lh-title">
+              {{ item.title | link_to: item.url | replace: 'href', 'class="link dim black-70" href' }}
+            </h1>
+            <p class="f6 f5-l lh-copy black-80">
+              {{ item.content | strip_html | truncatewords: 50 }}
+            </p>
+          </div>
+        </div>
+      </article>
+    {% else %}
+      <h1 class="f3 fw1 mt0 lh-title black-70">
+        No results
+      </h1>
+    {% endfor %}
+  {% endif %}
+
+  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+{% endpaginate %}

@@ -1,0 +1,127 @@
+<header>
+  <h1 class="tc fw4 tracked mt0">Your cart</h1>
+</header>
+
+{% if cart.item_count > 0 %}
+  <div class="w-100 ba b--silver pa3">
+    <h5 class="lh-copy fw3 f4 ma0">Can I order more than one box?</h5>
+    <p class="lh-copy">
+      <a
+        href="/cart/clear"
+        class="fr link f6 ttu tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+        >Empty cart</a>
+      You sure can, but you will need to place the orders separately.
+    </p>
+  </div>
+
+  <form action="/cart" method="post" novalidate>
+      <table class="w-100" cellspacing="0">
+          <thead class="bb b--streamside-maroon ph0">
+            <th class="tc ttu f6 fw3 bb b--streamside-maroon pl3 pv4" colspan="2">Product</th>
+            <th class="tr ttu f6 fw3 bb b--streamside-maroon pv4">Price</th>
+            <th class="tc ttu f6 fw3 bb b--streamside-maroon pv4">Quantity</th>
+            <th class="tr ttu f6 fw3 bb b--streamside-maroon pv4">Total</th>
+        </thead>
+        <tbody data-cart-line-items>
+        {% for item in cart.items %}
+          <tr>
+            <td class="bb b--streamside-maroon pv2 pr4">
+              <a href="{{ item.url | within: collections.all }}">
+                {% if item.image %}
+                  <img
+                    src="{{ item | img_url: 'medium' }}"
+                    class="ba b--silver br1"
+                    alt="{{ item.image.alt | escape }}" />
+                {% else %}
+                  {% include 'icon-image-blank' %}
+                {% endif %}
+              </a>
+            </td>
+            <td class="bb b--streamside-maroon pv2">
+              <a 
+                class="link ttu fw4 f5"
+                href="{{ item.url }}"
+                >{{ item.product.title }}</a>
+              {% comment %}
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+              {% endcomment %}
+              {%- assign properties = 'template ' | split: ' ' -%}
+              {%- assign property_size = item.properties | size -%}
+              {%- if property_size > 0 -%}
+                {%- assign properties = item.properties -%}
+              {%- endif -%}
+
+              <ul class="list f6">
+                {%- for p in properties -%}
+                  {%- unless p.last == blank -%}
+                    <li>
+                      <span class="b">{{ p.first }}: </span>
+                      <span>{{ p.last | replace: ',', ', ' }}</span>
+                    </li>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </ul>
+              {%- if item.product.type == 'Container Box' -%}
+                <div class="mv3">
+                <a
+                  href="{{ item.url }}"
+                  class="link f6 ttu tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+                  aria-label="Edit box"
+                  >
+                    Edit or remove box
+                  </a>
+                </div>
+              {%- endif -%}
+            </td>
+            <td class="bb b--streamside-maroon pv2 tr w4">{{ item.price | money }}</td>
+            <td class="bb b--streamside-maroon pv2 tc w4">
+              {% comment %}
+              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+              {% endcomment %}
+              {{ item.quantity }}
+            </td>
+            <td class="bb b--streamside-maroon pv2 tr w3">
+              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+              {{ item.line_price | money }}
+              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="fl pt3">
+      <label for="CartSpecialInstructions" class="db fw3 lh-copy f5 pb1">
+        Add a delivery note to your order here (email us with any other questions)
+      </label>
+      <textarea
+        name="note"
+        id="CartSpecialInstructions"
+        class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
+        >{{ cart.note }}</textarea>
+    </div>
+    <div class="fr tr">
+      <p><span class="ttu fw3 f6 mr4">Sub total:</span> {{ cart.total_price | money }}</p>
+      <p class="f7">Tax included and shipping calculated at checkout</p>
+      <button
+        type="submit"
+        class="f6 ttu tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+        name="checkout"
+        >Checkout</button>
+    </div>
+  </form>
+{% else %}
+  <div class="center f5 tc">
+    <p class="center f5 tc">
+      You cart is currently empty
+    </p>
+    <p class="center f5 tc">
+      <a
+        href="/"
+        class="link f6 ttu tracked dim outline-0 debut-yellow b--debut-brown ba ba1 bg-debut-brown br2 pa2 mb1 pointer"
+        aria-label="Continue shopping"
+        >
+        Continue shopping&nbsp;<span class="dib f3" style="transform: translate(2px, 2px);">&#10141;</span>
+        </a>
+    </p>
+  </div>
+{% endif %}
