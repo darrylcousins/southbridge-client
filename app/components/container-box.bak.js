@@ -14,7 +14,7 @@ import { renderer } from "@bikeshaving/crank/cjs/dom";
 
 import Error from "./error";
 import BarLoader from "./bar-loader";
-import QuantityForm from "./quantity-form";
+import QuantityForm from "./container/quantity-form";
 import SelectMenu from "./select-menu";
 import Flash from "./flash";
 import { Fetch, PostFetch } from "./fetch";
@@ -581,7 +581,7 @@ async function* ContainerBoxApp({productJson}) {
     } else {
       fetchDates = json;
       if (fetchDates.length === 1) {
-        //selectBox(fetchDates[0]); // this causes a flicket because drop down already rendered
+        selectBox(fetchDates[0]); // this causes a flicket because drop down already rendered
         flashMessage = "";
       }
     }

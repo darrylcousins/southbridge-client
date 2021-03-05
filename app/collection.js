@@ -17,29 +17,6 @@ import BarLoader from "./components/bar-loader";
 import SelectMenu from "./components/select-menu";
 
 function* BoxContent ({productJson}) {
-  /** 
-   * Only required on developement site where id's don't match boxes - can be
-   * updated once we can duplicated box mongo db
-   */
-  const idMap = {
-    // small
-    "6163982876822": "5571286728870",
-    // med
-    "6163982975126": "5571286794406",
-    // med fruit
-    "6163982844054": "5576573878438",
-    // med bread
-    "6163982942358": "5577031352486",
-    // big
-    "6163982680214": "5571286696102",
-    // custom
-    "6163982647446": "5598426005670",
-  }
-  /** 
-   * Only required on developement site where id's don't match boxes - can be
-   * updated once we can duplicated box mongo db
-   */
-  const variantMap = JSON.parse(document.querySelector("#variant-map").textContent);
   /**
    * Base url to api
    *
@@ -121,7 +98,12 @@ function* BoxContent ({productJson}) {
         case `selectDate${productJson.id}`:
           const date = ev.target.getAttribute("data-item");
           selectedDate = date;
+
+          //selectedBox = fetchJson[selectedDate];
+          // now seriously I need to update includedProducts
+          // and also check cart
           //selectBox(date);
+          includedProducts = fetchJson[selectedDate].includedProducts;
           menuSelectDate = false;
           this.refresh()
           break;
@@ -147,13 +129,15 @@ function* BoxContent ({productJson}) {
 
   /**
    * Submit cart data as made up from makeCart - also the callee
+   * TODO this is the same as for container box!!
+   * And so should be!
    *
    * @function submitCart
    */
   const submitCart = async ({ cart }) => {
 
     const data = {
-      id: variantMap[fetchJson[selectedDate].shopify_variant_id],
+      id: fetchJson[selectedDate].shopify_variant_id,
       quantity: 1,
       properties: {
         "Delivery Date": selectedDate,
@@ -175,18 +159,18 @@ function* BoxContent ({productJson}) {
   /**
    * Gather box includes for display, watch for dates
    *
-   * @function selectBox
-   * @param date {string} The selected date
+   * @function init
    */
-  const getData = async () => {
-    await Fetch(`${baseUrl}current-boxes-by-product/${idMap[productJson.id]}`)
+  const init = async () => {
+    await Fetch(`${baseUrl}current-boxes-by-product/${productJson.id}`)
       .then(({error, json}) => {
         if (error) {
           fetchError = error;
         } else {
           if (Object.keys(json).length > 0) {
             fetchDates = Object.keys(json);
-            includedProducts = json[fetchDates[0]].includedProducts.map(el => el.shopify_title.replace(/^- ?/, ""));
+            //includedProducts = json[fetchDates[0]].includedProducts.map(el => el.shopify_title.replace(/^- ?/, ""));
+            includedProducts = json[fetchDates[0]].includedProducts;
             fetchJson = json;
           }
         }
@@ -196,7 +180,7 @@ function* BoxContent ({productJson}) {
   };
 
   // get loaded
-  getData();
+  init();
 
   while(true) {
     yield (
@@ -214,10 +198,10 @@ function* BoxContent ({productJson}) {
               ) : (
                 includedProducts.map(el => (
                   <a
-                    href={`/products/${el.replace(/ /g, '-').toLowerCase()}`}
+                    href={`/products/${el.shopify_handle}`}
                     class="link pointer o-90 fl f6 ph3 ma1 ba br-pill b--streamside-blue bg-transparent fg-streamside-blue"
                   >
-                      { el }
+                      { el.shopify_title }
                   </a>
               )))}
             </div>

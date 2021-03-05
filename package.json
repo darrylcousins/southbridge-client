@@ -20,6 +20,8 @@
     "@babel/eslint-plugin": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
+    "@swup/progress-plugin": "^1.0.0",
+    "@swup/scroll-plugin": "^1.0.6",
     "babel": "^6.23.0",
     "babel-brunch": "^7.0.1",
     "body-parser": "^1.19.0",

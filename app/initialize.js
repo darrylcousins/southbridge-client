@@ -7,6 +7,8 @@
  */
 import "regenerator-runtime/runtime"; // regeneratorRuntime error
 import Swup from "swup";
+import SwupScrollPlugin from '@swup/scroll-plugin';
+import SwupProgressPlugin from '@swup/progress-plugin';
 import collection from "./collection";
 import boxApp from "./box-app";
 
@@ -34,7 +36,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   // do your setup here
   //const main = document.querySelectorAll("#swup");
   //console.log('page loaded in transitions, HERE');
-  const swup = new Swup();
+  const swup = new Swup({
+    cache: false,
+    plugins: [
+      new SwupScrollPlugin({}),
+      new SwupProgressPlugin({}),
+    ],
+    containers: [
+      "#swup",
+      "#cartIcon"
+    ]
+  });
   window.swup = swup;
   init();
   swup.on('contentReplaced', init);

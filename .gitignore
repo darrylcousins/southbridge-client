@@ -7,11 +7,13 @@
 *.swo
 *.swp
 *.vi
+*.bak.*
 *~
 *.sass-cache
 .env
 package-lock.json
 theme/config.yml
+theme/new.sh
 
 # OS or Editor folders
 .DS_Store

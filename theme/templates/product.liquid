@@ -10,17 +10,31 @@
       </div>
       <div class="w-100 w-50-ns pl3-ns">
         <h2 class="f2 fw4 mt0 mb1 lh-title">{{ product.title }}</h2>
-        <p class="f5 lh-copy mv0 b black-80" id="product-price">{{ product.price | money }}</p>
+        <div class="flex flex-column flex-row">
+          <div class="w-50">
+            <p class="f5 lh-copy mv0 b black-80" id="product-price">{{ product.price | money }}</p>
+          </div>
+          <div class="w-50 tr">
+            {% if product.type == 'Container Box' %}
+              <p class="f7 lh-copy mv0 black-40" id="product-base-price">Base box price {{ product.price | money }}</p>
+            {% endif %}
+          </div>
+        </div>
         <script type="application/json" id="product-json">
           {{ product | json }}
         </script>
         <script type="application/json" id="cart-json">
           {{ cart | json }}
         </script>
-        <div id="app"></div>
+        {% if product.type == 'Container Box' %}
+          <div id="app"></div>
+        {% endif %}
         <div class="f6 f5-l lh-copy black-80 mt0" id="product-description">
            {{ product.description }}
         </div>
+        {% if product.type == 'Box Produce' %}
+          <div id="app"></div>
+        {% endif %}
       </div>
     </div>
   </article>

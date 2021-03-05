@@ -28,7 +28,7 @@ const SelectMenu = ({ id, active, title, menu, children }) => {
         { children }
       </button>
       { active && (
-        <div class="absolute w-100 bg-white br2">
+        <div class="absolute w-100 bg-white br2 z-max">
         {menu.map((el, idx, arr) => (
           <TextButton text={el.text} index={idx} array={arr} name={id} item={el.item} />
         ))}

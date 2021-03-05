@@ -78,11 +78,11 @@ const PostFetch = async ({ src, data, headers }) => {
       if (response.status !== 200) {
         throw new Error(JSON.stringify(await response.json()));
       }
-      console.log("Got this response in POST fetch", response);
+      //console.log("Got this response in POST fetch", response);
       return response.json();
     })
     .then((json) => {
-      console.log("Got this in POST fetch:", json);
+      //console.log("Got this in POST fetch:", json);
       return { error: null, json };
     })
     .catch((error) => {
